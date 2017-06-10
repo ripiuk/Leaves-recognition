@@ -1,0 +1,82 @@
+/**{
+  border:1px solid rgba(0,0,0,0.3);
+}*/
+body{
+    background-color: #eee;
+}
+.navbar{
+    border-radius: 0;
+    margin-bottom: 0;
+    border: 0;
+}
+.jumbotron {
+  align-items: center;
+  background-image: url('https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/jumbotron.jpg+clearIT');
+  background-size: cover;
+  color: #ffffff;
+  height: 60vh;
+  margin-bottom:0;
+}
+.black{
+    background: rgba(0,0,0,0.7);
+    border-radius:15px;
+}
+.col-md-1.smaller{
+    width: 2%;
+    margin: 0 auto;
+}
+.col-md-5.bigger{
+    width:49%;
+}
+.col-md-6.bigger{
+    width:49%;
+}
+.choose{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.imgg{
+    display: block;
+    object-fit: cover;
+    max-height: 600px;
+    max-width: 100%;
+}
+.img-show{
+    height:100%;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+label[for="id_image"]{
+    display:none;
+}
+input[type="file"]{
+    display:none;
+}
+label[for="id_image"].vis{
+    display:inline;
+}
+.upload{
+    color:black;
+}
+input[id="uploadFile"]{
+    cursor: default;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    border-radius: 2px;
+    color:white;
+}
+

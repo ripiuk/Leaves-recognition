@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Leaves Recognition{% endblock %}
+{% block logo %}background-color:#ECECEC;{% endblock %}
+{% block body %}
+<section class="jumbotron">
+    <div class="container">
+    <div class="row" align="center">
+        <figure class="col-sm-12">
+            <figure class="col-sm-6 col-sm-offset-5 black">
+                <br>
+                <form action="{% url 'recognition:index' %}" method="post" enctype="multipart/form-data" class="choose">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <p>Select an Image:</p>
+                    <label for = "id_image" class="vis btn btn-default">Browse</label>
+                    <input class="upload" id="uploadFile" placeholder="Choose .jpeg File" disabled="disabled"/>
+                    <br>
+                    <input type="submit" value="Submit" class="btn btn-success" style="bottom:15px;margin-top: 20px;"/>
+                </form >
+                <br>
+            </figure>
+        </figure>
+    </div>
+        </div>
+</section>
+<script>document.getElementById("id_image").onchange = function () {
+                            document.getElementById("uploadFile").value = this.value;
+                        };</script>
+{% endblock %}
