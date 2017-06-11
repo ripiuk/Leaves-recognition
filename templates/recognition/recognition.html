@@ -7,18 +7,18 @@
             <div class="thumbnail">
             <div class="caption">
                 <p>Result:</p>
-                <p>{{result}}</p>
+                <p>{{result.0}}</p>
                 <canvas id="myDoughnutChart" style="max-width:100%"></canvas>
                 <script>
                 var ctx = document.getElementById("myDoughnutChart");
                 var data = {
                     labels: [
-                        "{{first_label}}",
-                        "{{second_label}}"
+                        "{{result.0}}",
+                        "{{result.2}}"
                     ],
                     datasets: [
                         {
-                            data: [{{first_score}}*100, {{second_score}}*100],
+                            data: [{{result.1}}*100, {{result.3}}*100],
                             backgroundColor: [
                                 "#FF6384",
                                 "#36A2EB"
@@ -45,10 +45,23 @@
             <div class="thumbnail">
             <div class="caption">
                 <p>Your Image:</p>
-                <img src='{{image.url}}' style="display: block;object-fit: cover;max-height: 600px;max-width: 100%;"/>
+                <img src='{{image.url}}' style="display: block;object-fit: cover;height: 329px;max-width: 100%;"/>
             </div>
                 </div>
         </figure>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="thumbnail">
+                <div style="margin:20px; text-align: justify;text-indent: 1.5em;line-height: 1.5">
+                    <p style="text-align: center;"><b>{{tree.title|upper}}</b></p>
+                    <p style="margin-bottom: 0em;">
+                        <img src="{{tree.image.url}}" align="left" style="margin: 0px 20px 10px 0px;height: 329px;max-width: 100%;"/>
+                        {{tree.description|safe}}
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Header -->
         <div class="navbar-header">
@@ -25,32 +25,23 @@
         </div>
         <!-- Items -->
         <div class="collapse navbar-collapse" id="topNavBar">
-
             <ui class="nav navbar-nav">
-                <li class="{% block category_active %} {% endblock %}">
-                    <a href="">
+                <li class="{% block all_pic %}{% endblock %}">
+                    <a href="{% url 'recognition:all_pic' %}">
                         <span class="glyphicon glyphicon-list-alt"aria-hidden="true"></span>&nbsp;
-                        Category list
-                    </a>
-                </li>
-                <li class="{% block product_active %} {% endblock %}">
-                    <a href="">
-                        <span class="glyphicon glyphicon-tag"aria-hidden="true"></span>&nbsp;
-                        {% block category_name %}Products{% endblock %}
-                    </a>
-                </li>
-                <li class="{% block the_product_active %} {% endblock %}">
-                    <a href="">
-                        <span class="glyphicon glyphicon-bookmark"aria-hidden="true"></span>&nbsp;
-                        {% block product_name %}The product{% endblock %}
+                        All recognized pictures
                     </a>
                 </li>
             </ui>
             <form class="navbar-form navbar-left" role="search" method="get" action="" accept-charset="utf-8">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                         </button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-default">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
