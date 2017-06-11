@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Result{% endblock %}
+{% block body %}
+{% if res %}
+    <div class="container" style="margin-top:20px;">
+        <div class="row good_row" >
+            {% for image in res %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <a href="{% url 'recognition:recognition' id=image.id %}">
+                        <img src="{{image.image.url}}" class="img-responsive img-show" style="display: block;object-fit: cover;height: 250px;max-width: 100%;">
+                        <div class="caption">
+                            <h5>Tree: {{image.tree}}</h5>
+                            <h5>User: {{image.user}}</h5>
+                            <h5>Created at: {{image.created_at}}</h5>
+                            <h5>Modified at: {{image.modified_at}}</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row good_row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="{% if request.GET.q %}?q={{ request.GET.q }}{% endif %}&page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="{% if request.GET.q %}?q={{ request.GET.q }}{% endif %}&page={{ page_obj.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h3 style="text-align:center;">No Results found</h3>
+{% endif %}
+{% endblock %}

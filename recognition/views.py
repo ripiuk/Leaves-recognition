@@ -5,8 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.core.urlresolvers import reverse
 from recognition.what_leaf_is import label_image
-
-result = []
+from functools import reduce
+from django.db.models import Q
+import operator
 
 
 class IndexView(generic.FormView):
@@ -14,7 +15,6 @@ class IndexView(generic.FormView):
     form_class = RecognitionImageForm
 
     def form_valid(self, form):
-        global result
         recognition_image = Recognition(image=self.get_form_kwargs().get('files')['image'])
         recognition_image.save()
         result = label_image.recognition(recognition_image.image.path)
@@ -59,3 +59,22 @@ class PersonalAcc(generic.ListView):
 
     def get_queryset(self):
         return Recognition.objects.filter(user=self.request.user)
+
+
+class SearchList(generic.ListView):
+    template_name = 'recognition/search_res.html'
+    context_object_name = 'res'
+    paginate_by = 8
+
+    def get_queryset(self):
+        res = Recognition.objects.all()
+        query = self.request.GET.get('q')
+        if query:
+            query_list = query.split()
+            res = res.filter(
+                reduce(operator.and_,
+                       (Q(tree__title__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(user__username__icontains=q) for q in query_list))
+            )
+        return res

@@ -33,7 +33,7 @@
                     </a>
                 </li>
             </ui>
-            <form class="navbar-form navbar-left" role="search" method="get" action="" accept-charset="utf-8">
+            <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'recognition:search' %}" accept-charset="utf-8">
                 <div class="input-group">
                     <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search">
                     <div class="input-group-btn">
