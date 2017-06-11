@@ -20,6 +20,10 @@ class IndexView(generic.FormView):
         result = label_image.recognition(recognition_image.image.path)
         recognition_image.tree = Tree.objects.get(title=result[0])
         recognition_image.result = ', '.join(str(i) for i in result)
+        if self.request.user.is_authenticated():
+            recognition_image.user = self.request.user
+        else:
+            recognition_image.user = None
         recognition_image.save()
         self.id = recognition_image.id
         return HttpResponseRedirect(self.get_success_url())
@@ -46,3 +50,12 @@ class ShowAll(generic.ListView):
 
     def get_queryset(self):
         return Recognition.objects.all().order_by('-id')
+
+
+class PersonalAcc(generic.ListView):
+    template_name = 'recognition/personal_account.html'
+    context_object_name = 'account_img'
+    paginate_by = 8
+
+    def get_queryset(self):
+        return Recognition.objects.filter(user=self.request.user)

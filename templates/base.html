@@ -45,7 +45,11 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
-                <li><a>You logged in as {{user}}</a></li>
+                <li class="{% block personal_acc %}{% endblock %}">
+                    <a href="{% url 'recognition:personal_acc' %}">
+                        Account ({{user}})
+                    </a>
+                </li>
                 <li>
                     <a href="{% url 'auth_logout' %}">
                         <span class="glyphicon  glyphicon-off" aria-hidden="true"></span>&nbsp;

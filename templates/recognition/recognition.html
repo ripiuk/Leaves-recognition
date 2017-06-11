@@ -2,19 +2,19 @@
 {% block title %}Leaves Recognition{% endblock %}
 {% block body %}
 <section class="container col-centered" style="margin-top:20px;">
-    <div class="row col-centered" align="center">
+    <div class="row col-centered good_row" align="center">
         <figure class="col-md-5  col-centered">
             <div class="thumbnail">
             <div class="caption">
                 <p>Result:</p>
-                <p>{{result.0}}</p>
+                <p>{{result.0|title}} ~ {% widthratio result.1 1 100 %}%</p>
                 <canvas id="myDoughnutChart" style="max-width:100%"></canvas>
                 <script>
                 var ctx = document.getElementById("myDoughnutChart");
                 var data = {
                     labels: [
-                        "{{result.0}}",
-                        "{{result.2}}"
+                        "{{result.0|title}}",
+                        "{{result.2|title}}"
                     ],
                     datasets: [
                         {
@@ -50,7 +50,7 @@
                 </div>
         </figure>
     </div>
-    <div class="row">
+    <div class="row good_row">
         <div class="col-lg-12">
             <div class="thumbnail">
                 <div style="margin:20px; text-align: justify;text-indent: 1.5em;line-height: 1.5">
