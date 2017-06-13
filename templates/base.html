@@ -29,7 +29,15 @@
                 <li class="{% block all_pic %}{% endblock %}">
                     <a href="{% url 'recognition:all_pic' %}">
                         <span class="glyphicon glyphicon-list-alt"aria-hidden="true"></span>&nbsp;
-                        All recognized pictures
+                        Pictures
+                    </a>
+                </li>
+            </ui>
+            <ui class="nav navbar-nav">
+                <li class="{% block all_tree %}{% endblock %}">
+                    <a href="{% url 'recognition:trees' %}">
+                        <span class="glyphicon glyphicon-list-alt"aria-hidden="true"></span>&nbsp;
+                        Trees
                     </a>
                 </li>
             </ui>

@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^all_pictures/$', views.ShowAll.as_view(), name='all_pic'),
     url(r'^account/$', views.PersonalAcc.as_view(), name='personal_acc'),
     url(r'^search_result/?$', views.SearchList.as_view(), name='search'),
+    url(r'^all_trees/$', views.show_trees, name='trees'),
+    url(r'^all_trees/(?P<id>\d+)/$', views.the_tree, name='the_tree'),
 ]

@@ -10,8 +10,8 @@
                     <a href="{% url 'recognition:recognition' id=image.id %}">
                         <img src="{{image.image.url}}" class="img-responsive img-show" style="display: block;object-fit: cover;height: 250px;max-width: 100%;">
                         <div class="caption">
-                            <h5>Tree: {{image.tree}}</h5>
-                            <h5>User: {{image.user}}</h5>
+                            <h5><b>Tree: {{image.tree}}</b></h5>
+                            <h5><b>User: {{image.user}}</b></h5>
                             <h5>Created at: {{image.created_at}}</h5>
                             <h5>Modified at: {{image.modified_at}}</h5>
                         </div>

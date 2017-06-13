@@ -14,14 +14,16 @@
                 var data = {
                     labels: [
                         "{{result.0|title}}",
-                        "{{result.2|title}}"
+                        "{{result.2|title}}",
+                        "{{result.4|title}}"
                     ],
                     datasets: [
                         {
-                            data: [{{result.1}}*100, {{result.3}}*100],
+                            data: [{{result.1}}*100, {{result.3}}*100, {{result.5}}*100],
                             backgroundColor: [
                                 "#FF6384",
-                                "#36A2EB"
+                                "#36A2EB",
+                                "#AEFF60"
                             ],
                             hoverBackgroundColor: [
                                 "#FF6384",

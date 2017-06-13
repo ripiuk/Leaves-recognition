@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.core.urlresolvers import reverse
 from recognition.what_leaf_is import label_image
 from functools import reduce
-from django.db.models import Q
+from django.db.models import Q, Count
 import operator
 
 
@@ -50,6 +50,52 @@ class ShowAll(generic.ListView):
 
     def get_queryset(self):
         return Recognition.objects.all().order_by('-id')
+
+
+"""class ShowTrees(generic.ListView):
+    template_name = 'recognition/all_tree.html'
+    context_object_name = 'all_tree'
+    paginate_by = 8
+
+    def get_queryset(self):
+        return Tree.objects.all().order_by('id')"""
+
+def show_trees(request):
+    all_tree = Tree.objects.all().order_by('id')
+    maple = Recognition.objects.filter(tree=all_tree[0]).count()
+    birch = Recognition.objects.filter(tree=all_tree[1]).count()
+    willow = Recognition.objects.filter(tree=all_tree[2]).count()
+    context = {
+        'all_tree': all_tree,
+        'maple': maple,
+        'birch': birch,
+        'willow': willow,
+    }
+    return render(request, 'recognition/all_tree.html', context)
+
+
+"""class TheTree(generic.DetailView):
+    template_name = 'recognition/tree_detail.html'
+    model = Tree
+    pk_url_kwarg = 'id'
+
+    def lol2(self):
+        return self.kwargs['id']
+
+    #lol = Recognition.objects.filter(tree=Tree.objects.filter(id=lol2))"""
+
+
+def the_tree(request, id=None):
+    instance = get_object_or_404(Tree, id=id)
+    images = Recognition.objects.filter(tree=instance)
+    context = {
+        'tree': instance,
+        'images': images,
+    }
+    return render(request, 'recognition/tree_detail.html', context)
+
+
+
 
 
 class PersonalAcc(generic.ListView):

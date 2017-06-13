@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{{tree.title}}{% endblock %}
+{% block body %}
+<section class="container col-centered" style="margin-top:20px;">
+    <div class="row good_row">
+        <div class="col-lg-12">
+            <div class="thumbnail">
+                <div style="margin:20px; text-align: justify;text-indent: 1.5em;line-height: 1.5">
+                    <p style="text-align: center;"><b>{{tree.title|upper}}</b></p>
+                    <p style="text-align: center;">The count of recognized images: {{ images.count }}</p>
+                    <p style="margin-bottom: 0em;">
+                        <img src="{{tree.image.url}}" align="left" style="margin: 0px 20px 10px 0px;height: 329px;max-width: 100%;"/>
+                        {{tree.description|safe}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

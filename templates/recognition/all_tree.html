@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}All Trees{% endblock %}
+{% block all_tree %}active{% endblock %}
+{% block body %}
+<div class="container" style="margin-top:20px;">
+    <div class="row good_row" >
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h5 style="text-align:center">Count of recognized pictures:</h5>
+                    <canvas id="myDoughnutChart" style="max-width:100%"></canvas>
+                    <script>
+                        var ctx = document.getElementById("myDoughnutChart");
+                        var data = {
+                            labels: [
+                                "{{all_tree.0.title|title}}",
+                                "{{all_tree.1.title|title}}",
+                                "{{all_tree.2.title|title}}"
+                            ],
+                            datasets: [
+                                {
+                                    label: "result",
+                                    data: [{{maple}}, {{birch}}, {{willow}}],
+                                    backgroundColor: [
+                                        "#FF6384",
+                                        "#36A2EB",
+                                        "#AEFF60"
+                                    ],
+                                    hoverBackgroundColor: [
+                                        "#FF6384",
+                                        "#36A2EB"
+                                    ]
+                                }]
+                        };
+                        var myBarChart = new Chart(ctx, {
+                            type: 'horizontalBar',
+                            data: data,
+                            options: {
+                                legend: { display: false },
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            min: 0 // Edit the value according to what you need
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        stacked: true
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        {% for tree in all_tree %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="thumbnail">
+                <a href="{% url 'recognition:the_tree' id=tree.id %}">
+                    <img src="{{tree.image.url}}" class="img-responsive img-show" style="display: block;object-fit: cover;height: 250px;max-width: 100%;">
+                    <div class="caption">
+                        <h5 style="text-align:center"><b>{{tree.title|upper}}</b></h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row good_row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="/all_trees?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="/all_trees?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

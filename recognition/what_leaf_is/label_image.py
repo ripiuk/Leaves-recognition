@@ -1,7 +1,10 @@
-import tensorflow as tf
 import os
+import tensorflow as tf
+
 
 def recognition(image_path):
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
     # Read in the image_data
     image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
@@ -13,7 +16,7 @@ def recognition(image_path):
     with tf.gfile.FastGFile(os.getcwd() + "/recognition/what_leaf_is/retrained_graph.pb", 'rb') as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
-        _ = tf.import_graph_def(graph_def, name='')
+        tf.import_graph_def(graph_def, name='')
 
     with tf.Session() as sess:
         # Feed the image_data as input to the graph and get first prediction
@@ -30,8 +33,4 @@ def recognition(image_path):
             score = predictions[0][node_id]
             result.append(human_string)
             result.append(score)
-            #result = result + ('%s (score = %.5f)' % (human_string, score))
     return result
-
-def test(path):
-    return path
