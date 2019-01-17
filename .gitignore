@@ -1,4 +1,6 @@
-env
+venv
 *.pyc
 staticfiles
 .env
+.idea/
+media/recognitions/*

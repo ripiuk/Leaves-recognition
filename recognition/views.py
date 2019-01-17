@@ -18,6 +18,7 @@ class IndexView(generic.FormView):
         recognition_image = Recognition(image=self.get_form_kwargs().get('files')['image'])
         recognition_image.save()
         result = label_image.recognition(recognition_image.image.path)
+        print(result)
         recognition_image.tree = Tree.objects.get(title=result[0])
         recognition_image.result = ', '.join(str(i) for i in result)
         if self.request.user.is_authenticated():
